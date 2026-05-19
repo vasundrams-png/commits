@@ -44,7 +44,7 @@ button{
 
     <h1>Supply Chain Vulnerability Visualizer</h1>
 
-    <input type="text" placeholder="Enter Tech Stack">
+    <input type="text" id="techStack" placeholder="Enter Tech Stack">
     <br><br>
 
     <button onclick="analyzeStack()">Analyze</button>
@@ -69,14 +69,50 @@ button{
         Recommendation: Update vulnerable packages
     </p>
     <script>
+
 function analyzeStack() {
-    document.getElementById("result").innerHTML =
-    `
-    <p>jsonwebtoken - High Risk</p>
-    <p>Firebase - Medium Risk</p>
-    <p>Recommendation: Update vulnerable packages</p>
-    `;
+
+let input = document.getElementById("techStack").value;
+
+let result = "";
+
+if(input.includes("jsonwebtoken")){
+
+result += `
+<p style="color:red;">
+jsonwebtoken - High Risk
+</p>
+`;
 }
+
+if(input.includes("Firebase")){
+
+result += `
+<p style="color:orange;">
+Firebase - Medium Risk
+</p>
+`;
+}
+
+if(result === ""){
+
+result = `
+<p style="color:lightgreen;">
+No major vulnerabilities detected
+</p>
+`;
+}
+
+result += `
+<p style="color:lightgreen;">
+Recommendation: Update vulnerable packages
+</p>
+`;
+
+document.getElementById("result").innerHTML = result;
+
+}
+
 </script>
 
 </body>
