@@ -10,7 +10,7 @@
 
     <input type="text" placeholder="Enter Tech Stack">
 
-    <button>Analyze</button>
+    <button onclick="analyzeStack()">Analyze</button>
 
     <h2>Dependency Graph</h2>
 
@@ -19,9 +19,20 @@
     </div>
 
     <h2>Risk Analysis</h2>
+    <div id="result"></div>
 
     <p>High Risk: jsonwebtoken</p>
     <p>Medium Risk: Firebase</p>
+    <script>
+function analyzeStack() {
+    document.getElementById("result").innerHTML =
+    `
+    <p>jsonwebtoken - High Risk</p>
+    <p>Firebase - Medium Risk</p>
+    <p>Recommendation: Update vulnerable packages</p>
+    `;
+}
+</script>
 
 </body>
 </html>
