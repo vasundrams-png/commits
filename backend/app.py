@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Frontend-ல இருந்து Backend-க்கு data thadama varathuku ithu mukkiyam
+CORS(app)  
 
 # Simulated CVE & Trust-Chain Data Database (Mock Data)
 VULNERABILITY_DB = {
