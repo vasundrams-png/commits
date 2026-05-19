@@ -224,5 +224,68 @@
             </table>
         </footer>
     </main>
+<script>
+        document.querySelector('button').addEventListener('click', async () => {
+            const inputText = document.getElementById('techStackInput').value;
+            if (!inputText) return alert("Please enter some packages!");
+
+            try {
+                // CHANGE THIS URL STRING BELOW TO YOUR LOCALTUNNEL LINK
+                const tunnelUrl = 'http://127.0.0.1:5000'; 
+                
+                const response = await fetch(`${tunnelUrl}/api/analyze`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ tech_stack: inputText })
+                });
+                
+                const data = await response.json();
+                
+                // 1. Update Overall Risk Score Panel
+                document.querySelector('.text-4xl').innerText = data.overall_score;
+                const statusLabel = document.querySelector('.text-risk-high');
+                statusLabel.innerText = data.risk_status;
+                
+                // Dynamic Color Coding for risk status
+                if(data.overall_score >= 7.0) {
+                    statusLabel.style.color = '#f85149';
+                } else if(data.overall_score >= 4.0) {
+                    statusLabel.style.color = '#d29922';
+                } else {
+                    statusLabel.style.color = '#3fb950';
+                }
+
+                // 2. Update Risk Summary Table Dynamically
+                const tbody = document.querySelector('tbody');
+                tbody.innerHTML = ''; // Clear old static placeholder data
+                
+                data.packages.forEach(pkg => {
+                    const row = `
+                        <tr class="border-b border-default/50 hover:bg-color/50">
+                            <th scope="row" class="py-4 pr-6 font-medium whitespace-nowrap">${pkg.name}</th>
+                            <td class="py-4 pr-6">${pkg.type}</td>
+                            <td class="py-4 pr-6 font-mono text-secondary">${pkg.version}</td>
+                            <td class="py-4 pr-6 font-semibold">${pkg.risk_score}</td>
+                            <td class="py-4 pr-6"><span class="text-[10px] p-1.5 px-2 bg-gray-800 font-bold rounded-full uppercase">${pkg.risk_level}</span></td>
+                            <td class="py-4 pr-6 font-mono text-secondary">${pkg.issue}</td>
+                            <td class="py-4">${pkg.recommendation}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+
+                alert("Analysis Complete!");
+
+            } catch (error) {
+                console.error("Error connecting to backend:", error);
+                alert("Failed to connect to the backend server.");
+            }
+        });
+    </script>
 </body>
 </html>
+        
+               
+                
+                
+                       
