@@ -1,119 +1,170 @@
-
+```html
 <!DOCTYPE html>
 <html>
+
 <head>
+
+    <title>Supply Chain Vulnerability Visualizer</title>
+
     <style>
 
-body{
-    background-color:#0f172a;
-    color:white;
-    font-family:Arial;
-    padding:20px;
-}
+        body{
+            background-color:#0f172a;
+            color:white;
+            font-family:Arial;
+            padding:20px;
+        }
 
-h1{
-    color:#38bdf8;
-}
+        h1{
+            color:#38bdf8;
+        }
 
-input{
-    padding:10px;
-    width:300px;
-    border-radius:5px;
-}
+        h2{
+            color:#38bdf8;
+        }
 
-button{
-    padding:10px 20px;
-    background-color:#38bdf8;
-    border:none;
-    border-radius:5px;
-    color:white;
-    cursor:pointer;
-}
+        input{
+            padding:10px;
+            width:300px;
+            border-radius:5px;
+            border:none;
+        }
 
-#result{
-    margin-top:20px;
-    background:#1e293b;
-    padding:20px;
-    border-radius:10px;
-}
+        button{
+            padding:10px 20px;
+            background-color:#38bdf8;
+            border:none;
+            border-radius:5px;
+            color:white;
+            cursor:pointer;
+        }
 
-</style>
-    <title>Supply Chain Vulnerability Visualizer</title>
+        #result{
+            margin-top:20px;
+            background:#1e293b;
+            padding:20px;
+            border-radius:10px;
+        }
+
+        .card{
+            background:#1e293b;
+            padding:20px;
+            border-radius:10px;
+            margin-top:20px;
+        }
+
+    </style>
+
 </head>
+
 <body>
 
     <h1>Supply Chain Vulnerability Visualizer</h1>
 
     <input type="text" id="techStack" placeholder="Enter Tech Stack">
+
     <br><br>
 
     <button onclick="analyzeStack()">Analyze</button>
 
     <h2>Dependency Graph</h2>
 
-    <div style="background:#1e293b;padding:20px;border-radius:10px;">
+    <div class="card">
+
         <ul>
-        <li>Your App</li>
-        <li>React</li>
-        <li>jsonwebtoken ⚠</li>
-        <li>Firebase</li>
+            <li>Your App</li>
+            <li>React</li>
+            <li>jsonwebtoken ⚠</li>
+            <li>Firebase</li>
         </ul>
+
     </div>
 
     <h2>Risk Analysis</h2>
-    <div id="result"></div>
 
-    <p style="color:red;">jsonwebtoken - High Risk</p>
-    <p style="color:orange;">Firebase - Medium Risk</p>
-    <p style="color:lightgreen;">
-        Recommendation: Update vulnerable packages
-    </p>
+    <div id="result">
+
+        <p style="color:lightgreen;">
+            Enter a tech stack and click Analyze
+        </p>
+
+    </div>
+
+    <h2>Overall Risk Score</h2>
+
+    <div class="card">
+
+        <h3 style="color:red;">
+            Risk Score: 8.5 / 10
+        </h3>
+
+    </div>
+
+    <h2>Security Recommendations</h2>
+
+    <div class="card">
+
+        <ul>
+            <li>Update vulnerable packages</li>
+            <li>Reduce dependency chain depth</li>
+            <li>Enable dependency monitoring</li>
+            <li>Continuously monitor third-party dependencies</li>
+        </ul>
+
+    </div>
+
     <script>
 
-function analyzeStack() {
+        function analyzeStack() {
 
-let input = document.getElementById("techStack").value;
+            let input = document.getElementById("techStack").value;
 
-let result = "";
+            let result = "";
 
-if(input.includes("jsonwebtoken")){
+            if(input.includes("jsonwebtoken")){
 
-result += `
-<p style="color:red;">
-jsonwebtoken - High Risk
-</p>
-`;
-}
+                result += `
+                <p style="color:red;">
+                jsonwebtoken - High Risk
+                </p>
+                `;
 
-if(input.includes("Firebase")){
+            }
 
-result += `
-<p style="color:orange;">
-Firebase - Medium Risk
-</p>
-`;
-}
+            if(input.includes("Firebase")){
 
-if(result === ""){
+                result += `
+                <p style="color:orange;">
+                Firebase - Medium Risk
+                </p>
+                `;
 
-result = `
-<p style="color:lightgreen;">
-No major vulnerabilities detected
-</p>
-`;
-}
+            }
 
-result += `
-<p style="color:lightgreen;">
-Recommendation: Update vulnerable packages
-</p>
-`;
+            if(result === ""){
 
-document.getElementById("result").innerHTML = result;
+                result = `
+                <p style="color:lightgreen;">
+                No major vulnerabilities detected
+                </p>
+                `;
 
-}
+            }
 
-</script>
+            result += `
+            <p style="color:lightgreen;">
+            Recommendation: Update vulnerable packages
+            </p>
+            `;
+
+            document.getElementById("result").innerHTML = result;
+
+        }
+
+    </script>
 
 </body>
+
 </html>
+```
+
